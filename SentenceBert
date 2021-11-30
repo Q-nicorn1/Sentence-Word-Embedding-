@@ -1,0 +1,39 @@
+import nltk
+nltk.download('punkt')
+from nltk.tokenize import word_tokenize
+import numpy as np
+
+sentences = ["I try to taste if the soup needs more salt.", 
+             "I can taste the irony out of his words.", 
+             "This apple tastes unpleasant.",
+             "That person has a good taste for clothes."]
+             
+#tokenized sentences             
+tokenized_sent = []
+for s in sentences:
+    tokenized_sent.append(word_tokenize(s.lower()))
+tokenized_sent
+
+#function that returns cosine similarity between the two vectors
+def cosine(u, v):
+    return np.dot(u, v) / (np.linalg.norm(u) * np.linalg.norm(v))
+
+#import the model SentenceBert
+!pip install sentence-transformers
+
+from sentence_transformers import SentenceTransformer
+sbert_model = SentenceTransformer('bert-base-nli-mean-tokens')
+
+sentence_embeddings = model.encode(sentences)
+print('Sample BERT embedding vector - length', len(sentence_embeddings[0]))
+print('Sample BERT embedding vector - note includes negative values', sentence_embeddings[0])
+
+#test and encode
+query = "This apple tastes unpleasant"
+query_vec = model.encode([query])[0]
+
+#compute cos similarity
+for sent in sentences:
+  sim = cosine(query_vec, model.encode([sent])[0])
+  print("Sentence = ", sent, "; similarity = ", sim)
+  
