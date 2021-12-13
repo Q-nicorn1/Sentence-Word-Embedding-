@@ -30,3 +30,5 @@ Stanford's Glove is a supervised sentence embedding that pretrained by <a href="
 It indentifies relationship between words, which using co-occurence matrix to caluculate the probability of the word.   
 
 ## Conclusion
+There is no single one model that is the best for sentence embedding, because each model has its best performing text tasks, so better to choose model based on the task(e.g. semantic relatedness or sentiment analysis).
+
